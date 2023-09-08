@@ -1,6 +1,5 @@
 export type WasilianaConfig = {
     apiKey: string
-    partnerId: number | string
     senderId: string
     baseUrl?: string
 }

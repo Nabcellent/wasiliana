@@ -20,14 +20,15 @@ export class Wasiliana {
             baseURL: this.config.baseUrl,
             headers: {
                 Accept: 'application/json',
-                ContentType: 'application/json'
+                ContentType: 'application/json',
+                apiKey: this.config.apiKey
             }
         });
 
         return http[method](url, data).then(({ data }) => data).catch(e => {
             if (e instanceof AxiosError) {
                 if (e.response?.status === 422) {
-                    throw new ValidationErr(e.response.data.errors)
+                    throw new ValidationErr(e.response.data.message)
                 }
                 if (e.response?.status === 401) {
                     throw new UnauthorizedErr(e.response?.data['response-description'])

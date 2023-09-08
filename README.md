@@ -73,32 +73,7 @@ const response = await wasiliana.sms.text('#WasilianaTest').to([254123456789]).s
 ]
 ```
 
-#### 2. Schedule Sms
-Provide a Moment or Date instance to the send method.
-```js
-const response = await wasiliana.sms.text('#WasilianaTest').to(254123456789).send(new Date('2023-12-20'))
-```
-<small><i>PS: The date must be after current time.</i>🌚</small>
-
-#### 3. Get Delivery Report
-```js
-//  Provide Message ID
-const response = await wasiliana.sms.getDeliveryReport("123456789")
-
-//  Expected response
-{
-    code: 200,
-    message_id: "123456789",
-    description: "Success",
-    delivery_status: 32,
-    delivery_description: "DeliveredToTerminal",
-    delivery_tat: "00:00:06",
-    delivery_networkid: 1,
-    delivery_time: "2023-02-18 21:16:22"
-}
-```
-
-#### 3. Calculate SMS Cost
+#### 2. Calculate SMS Cost
 Provide the text message.
 ```js
 const response = wasiliana.sms.cost('Hello World.')
@@ -109,16 +84,6 @@ const response = wasiliana.sms.cost('Hello World.')
 
 ---
 
-- ### Account
-Enables you to check the balance of your account
-
-1. Account balance
-```js
-const response = await wasiliana.balance.fetch()
-
-//  Expected response(number)
-7.33
-```
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
