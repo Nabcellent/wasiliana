@@ -39,7 +39,6 @@ import { Wasiliana, WasilianaConfig } from '@nabcellent/wasiliana';
 
 let config: WasilianaConfig = {
     apiKey   : process.env.WASILIANA_SMS_API_KEY,
-    partnerId: process.env.WASILIANA_SMS_PARTNER_ID,
     senderId : process.env.WASILIANA_SMS_SENDER_ID
 };
 
