@@ -22,7 +22,7 @@
 [license]: https://github.com/nabcellent/wasiliana/blob/main/LICENSE
 
 This is a <i>Typescript</i> package that interfaces with the [Wasiliana](https://wasiliana.com/) Api.
-The API enables you to initiate mobile Sms notifications.
+The API enables you to initiate mobile SMS notifications.
 
 ## Documentation
 
