@@ -1,4 +1,4 @@
-# Wasiliana Api
+# Wasiliana Api !STILL IN DEVELOPMENT!
 
 [![build status][build-badge]][build]
 [![code coverage][coverage-badge]][coverage]
