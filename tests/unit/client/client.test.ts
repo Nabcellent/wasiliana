@@ -5,6 +5,7 @@ import { UnauthorizedErr } from "../../../src/exceptions/unauthorized.err";
 import { NotFoundError } from "../../../src/exceptions/not-found.err";
 
 let wasiliana: Wasiliana;
+const validPhone = 254110039317;
 
 vi.mock('../../../src/utils/logger', () => ({
     log: {
@@ -25,11 +26,16 @@ describe('client', () => {
         it('should call axios', async function () {
             vi.spyOn(axios, 'create').mockReturnValue({
                 post<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
-                    return Promise.resolve(<R>{ data: { Data: [{ Credits: 'Ksh1.00', PluginType: 'SMS' }] } })
+                    return Promise.resolve(<R>{
+                        data: {
+                            status: 'success',
+                            data: 'Successfully Dispatched the sms to process'
+                        }
+                    })
                 }
             } as AxiosInstance)
 
-            await wasiliana.balance.fetch()
+            await wasiliana.sms.text('Test').to(validPhone).send()
 
             expect(axios.create).toHaveBeenCalledOnce()
         });
@@ -41,7 +47,7 @@ describe('client', () => {
                 }
             } as AxiosInstance)
 
-            await expect(wasiliana.balance.fetch()).rejects.toThrow('Unauthorized!')
+            await expect(wasiliana.sms.text('Test').to(validPhone).send()).rejects.toThrow('Unauthorized!')
         });
 
         it('should throw a not found error', async function () {
@@ -51,7 +57,7 @@ describe('client', () => {
                 }
             } as AxiosInstance)
 
-            await expect(wasiliana.balance.fetch()).rejects.toThrow('Not Found!')
+            await expect(wasiliana.sms.text('Test').to(validPhone).send()).rejects.toThrow('Not Found!')
         });
     })
 })

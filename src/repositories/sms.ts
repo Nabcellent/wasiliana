@@ -39,11 +39,7 @@ export class Sms {
             message: this.#message
         }
 
-        let { response } = await this.#client.makeRequest({ url: '/send/sms', data });
-
-        console.log(response)
-
-        return response
+        return await this.#client.makeRequest({ url: '/send/sms', data })
     }
 
     public cost(text: string): number {

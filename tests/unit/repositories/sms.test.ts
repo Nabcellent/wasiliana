@@ -43,39 +43,22 @@ describe('sms', () => {
 
         it('should send SMS if data is valid.', async () => {
             const request = makeRequest.mockResolvedValue({
-                responses: [{
-                    "response-code": 200,
-                    "response-description": "Success",
-                    "mobile": "254733123456",
-                    "messageid": 75085465,
-                    "clientsmsid": "1234",
-                    "networkid": "2"
-                }],
+                status: 'success',
+                data: "Successfully Dispatched the sms to process"
             })
 
             const res = await sms.text('#WasilianaTest').to(validPhone).send()
 
-            expect(res).toStrictEqual([{
-                code: 200,
-                description: 'Success',
-                message_id: 75085465,
-                client_sms_id: "1234",
-                network_id: "2",
-                mobile: "254733123456",
-                cost: .2
-            }])
+            expect(res).toStrictEqual({
+                status: 'success',
+                data: "Successfully Dispatched the sms to process"
+            })
+
             expect(request).toHaveBeenNthCalledWith(1, {
-                url: '/services/sendbulk', data: {
-                    count: 1,
-                    smslist: [{
-                        apikey: 'apiKey',
-                        partnerID: 'partnerId',
-                        pass_type: "plain",
-                        clientsmsid: 0,
-                        mobile: validPhone,
-                        message: '#WasilianaTest',
-                        shortcode: 'senderId',
-                    }]
+                url: '/send/sms', data: {
+                    recipients: [validPhone],
+                    from: wasiliana.config.senderId,
+                    message: '#WasilianaTest'
                 }
             })
         });
