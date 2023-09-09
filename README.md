@@ -32,6 +32,9 @@ You can install the package via npm or yarn:
 ```bash
 yarn add @nabcellent/wasiliana
 ```
+```bash
+npm i @nabcellent/wasiliana
+```
 ### Getting Started
 Initialize the Wasiliana class with your config.
 ```js
