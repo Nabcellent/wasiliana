@@ -37,3 +37,4 @@ src/server.ts
 
 /coverage
 coverage.*
+!coverage.yaml
