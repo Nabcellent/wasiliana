@@ -28,7 +28,7 @@ The API enables you to initiate mobile Sms notifications.
 
 ### Installation
 
-You can install the package via npm or yarn:
+You can install the package via yarn or npm:
 ```bash
 yarn add @nabcellent/wasiliana
 ```
