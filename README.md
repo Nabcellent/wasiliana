@@ -55,21 +55,38 @@ const response = await wasiliana.sms.text('#WasilianaTest').to(254123456789).sen
 const response = await wasiliana.sms.text('#WasilianaTest').to([254123456789]).send()
 
 //  Expected responses
-[
-    {
-        code: 200,
-        description: "Success",
-        mobile: "254123456789",
-        message_id: 75085465,
-        client_sms_id: "1234",
-        network_id: "2"
-    },
-    {
-        code: 1004,
-        description: "Low credit units...",
-        mobile: "254123456789",
-    }
-]
+
+//  --  SUCCESS
+{
+    status: 'success',
+    data: 'Successfully Dispatched the sms to process'
+}
+
+//  --  FAILED
+{
+    status: 'failed',
+    data: 'App does not match your api key'
+}
+OR
+{
+    status: 'failed',
+    data: 'Wrong sender id sent'
+}
+OR
+{
+    status: 'failed',
+    data: 'Short code does not exist'
+}
+OR
+{
+    status: 'failed',
+    data: 'App does not exist'
+}
+OR
+{
+    status: 'failed',
+    data: 'ApiKey must be present in the header'
+}
 ```
 
 #### 2. Calculate SMS Cost
