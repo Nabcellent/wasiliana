@@ -13,9 +13,16 @@ export type WasilianaRequest = {
     is_otp?: string
 }
 
-export type WasilianaResponse = {
+export type WasilianaRawResponse = {
     status: 'success' | 'failed',
     data: string
+}
+
+export type WasilianaResponse = {
+    status: 'success' | 'failed',
+    description: string
+    phone: string|number
+    cost: number
 }
 
 export type WasilianaRawDeliveryReport = {

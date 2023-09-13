@@ -49,10 +49,12 @@ describe('sms', () => {
 
             const res = await sms.text('#WasilianaTest').to(validPhone).send()
 
-            expect(res).toStrictEqual({
+            expect(res).toStrictEqual([{
                 status: 'success',
-                data: "Successfully Dispatched the sms to process"
-            })
+                description: "Successfully Dispatched the sms to process",
+                phone: validPhone,
+                cost: .2
+            }])
 
             expect(request).toHaveBeenNthCalledWith(1, {
                 url: '/send/sms', data: {

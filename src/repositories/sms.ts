@@ -1,6 +1,6 @@
 import { Wasiliana } from "../client";
 import { ValidationErr } from "../exceptions/validation.err";
-import { WasilianaRequest, WasilianaResponse, } from "../utils";
+import { WasilianaRawResponse, WasilianaRequest, WasilianaResponse, } from "../utils";
 import { isValidPhoneNumber } from "libphonenumber-js";
 
 export class Sms {
@@ -23,7 +23,7 @@ export class Sms {
         return this;
     }
 
-    public send = async (): Promise<WasilianaResponse> => {
+    public send = async (): Promise<WasilianaResponse[]> => {
         if (!this.#message) throw new ValidationErr('Text message is required.')
         if (this.#phones.length <= 0) throw new ValidationErr('Phone number is required.')
 
@@ -39,7 +39,14 @@ export class Sms {
             message: this.#message
         }
 
-        return await this.#client.makeRequest({ url: '/send/sms', data })
+        const res: WasilianaRawResponse = await this.#client.makeRequest({ url: '/send/sms', data })
+
+        return this.#phones.map(p => ({
+            description: res.data,
+            phone: p,
+            cost: this.cost(this.#message),
+            status: res.status
+        }))
     }
 
     public cost(text: string): number {
