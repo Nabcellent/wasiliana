@@ -6,6 +6,7 @@ import { isValidPhoneNumber } from "libphonenumber-js";
 export class Sms {
     #client: Wasiliana
     #message: string = "";
+    #messageId?: string | number;
     #phones: (string | number)[] = [];
 
     constructor(client: Wasiliana) {
@@ -19,6 +20,12 @@ export class Sms {
 
     public to(to: string | number | (string | number)[]) {
         this.#phones = Array.isArray(to) ? to : [to]
+
+        return this;
+    }
+
+    public messageId(id: string | number) {
+        this.#messageId = id
 
         return this;
     }
@@ -38,6 +45,8 @@ export class Sms {
             from: this.#client.config.senderId,
             message: this.#message
         }
+
+        if (this.#messageId) data.message_uid = this.#messageId
 
         const res: WasilianaRawResponse = await this.#client.makeRequest({ url: '/send/sms', data })
 

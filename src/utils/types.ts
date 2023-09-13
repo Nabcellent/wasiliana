@@ -9,7 +9,7 @@ export type WasilianaRequest = {
     from: string
     message: string
     linkid?: string
-    message_uid?: string
+    message_uid?: string|number
     is_otp?: string
 }
 
