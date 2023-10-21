@@ -9,13 +9,20 @@ export type WasilianaRequest = {
     from: string
     message: string
     linkid?: string
-    message_uid?: string
+    message_uid?: string|number
     is_otp?: string
+}
+
+export type WasilianaRawResponse = {
+    status: 'success' | 'failed',
+    data: string
 }
 
 export type WasilianaResponse = {
     status: 'success' | 'failed',
-    data: string
+    description: string
+    phone: string|number
+    cost: number
 }
 
 export type WasilianaRawDeliveryReport = {

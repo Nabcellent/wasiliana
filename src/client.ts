@@ -31,7 +31,7 @@ export class Wasiliana {
                     throw new ValidationErr(e.response.data.message)
                 }
                 if (e.response?.status === 401) {
-                    throw new UnauthorizedErr(e.response?.data['response-description'])
+                    throw new UnauthorizedErr(e.response.data.message)
                 }
                 if (e.response?.status === 404) {
                     throw new NotFoundError()
